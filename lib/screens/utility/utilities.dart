@@ -109,28 +109,34 @@ class _UtilityScreenState extends State<UtilityScreen>
                               },
                             );
                           })),
+                  SizedBox(height: SizeConfig.fromHeight(context, 1.8)),
+                  const Text('Select Account'),
+                  SizedBox(height: SizeConfig.fromHeight(context, 1.8)),
+                  Container(
+                    padding: const EdgeInsets.all(9),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color.fromRGBO(158, 158, 158, 1)),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white))),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        iconSize: SizeConfig.fontSize(context, 5),
+                        hint: const Text('Select Account'),
+                        isExpanded: true,
+                        onChanged: (account) {
+                          controller.account = account!;
+                        },
+                        items: controller.accounts
+                            .map((item) => buildMenuItem(item))
+                            .toList()),
+                  ),
+                ]),
                 SizedBox(height: SizeConfig.fromHeight(context, 1.8)),
-                const Text('Select Account'),
-                SizedBox(height: SizeConfig.fromHeight(context, 1.8)),
-                Container(
-                  padding: const EdgeInsets.all(9),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: const Color.fromRGBO(158, 158, 158, 1)),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: DropdownButton<String>(
-                      underline: null,
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      iconSize: SizeConfig.fontSize(context, 5),
-                      hint: const Text('Select Account'),
-                      isExpanded: true,
-                      onChanged: (account) {
-                        controller.account = account!;
-                      },
-                      items: controller.accounts
-                          .map((item) => buildMenuItem(item))
-                          .toList()),
-                ),]),
                 Expanded(
                     child: TabBarView(
                         controller: tabController,
